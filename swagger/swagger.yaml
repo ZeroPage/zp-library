@@ -1,0 +1,200 @@
+---
+swagger: "2.0"
+info:
+  description: "Backend REST API for ZP-Library.\n"
+  version: "1.0.0"
+  title: "ZP-Library API"
+basePath: "/api"
+schemes:
+- "http"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+security:
+- libraryKey: []
+paths:
+  /auth/source:
+    get:
+      tags:
+      - "Auth"
+      operationId: "controllers.default_controller.auth_source"
+      responses:
+        200:
+          description: "List all auth methods"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Auth"
+  /auth/key/{source}/{token}:
+    get:
+      tags:
+      - "Auth"
+      operationId: "controllers.default_controller.auth_key"
+      parameters:
+      - name: "source"
+        in: "path"
+        description: "one of the source"
+        required: true
+        type: "string"
+        enum:
+        - github
+        - twitter
+      - name: "token"
+        in: "path"
+        description: "acquired token from the source"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "get the library API key from the token (WORKING IN PROGRESS!)"
+          schema:
+            $ref: "#/definitions/Key"
+  /user:
+    get:
+      tags:
+      - "User"
+      operationId: "controllers.default_controller.current_user"
+      security:
+        - libraryKey: []
+      responses:
+        200:
+          description: "get current user"
+          schema:
+            $ref: "#/definitions/User"
+  /user/{id}:
+    get:
+      tags:
+      - "User"
+      operationId: "controllers.default_controller.selected_user"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "get selected user"
+          schema:
+            $ref: "#/definitions/User"
+        400:
+          description: "not found"
+  /book:
+    get:
+      tags:
+      - "Book"
+      operationId: "controllers.default_controller.book_get"
+      parameters:
+      - name: "limit"
+        in: "query"
+        description: "number of books to return"
+        required: false
+        type: "integer"
+        default: 10
+        maximum: 100.0
+        minimum: 10.0
+      responses:
+        200:
+          description: "List all books"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Book"
+  /book/{isbn}:
+    get:
+      tags:
+      - "Book"
+      operationId: "controllers.default_controller.book_isbn_get"
+      parameters:
+      - name: "isbn"
+        in: "path"
+        description: "isbn of the book"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Sends the book"
+    post:
+      tags:
+      - "Book"
+      operationId: "controllers.default_controller.book_isbn_post"
+      parameters:
+      - name: "isbn"
+        in: "path"
+        description: "isbn of the book"
+        required: true
+        type: "string"
+      - name: "book"
+        in: "body"
+        description: "The book JSON you want to post"
+        required: true
+        schema:
+          $ref: "#/definitions/Book"
+      security:
+        - libraryKey: []
+      responses:
+        200:
+          description: "Make a new book"
+    put:
+      tags:
+      - "Book"
+      operationId: "controllers.default_controller.book_isbn_put"
+      parameters:
+      - name: "isbn"
+        in: "path"
+        description: "isbn of the book"
+        required: true
+        type: "string"
+      - name: "book"
+        in: "body"
+        description: "The book JSON you want to post"
+        required: true
+        schema:
+          $ref: "#/definitions/Book"
+      security:
+        - libraryKey: []
+      responses:
+        200:
+          description: "Updates the book"
+securityDefinitions:
+  libraryKey:
+    type: apiKey
+    name: api_key
+    in: query
+definitions:
+  Book:
+    type: "object"
+    properties:
+      isbn:
+        type: "string"
+      name:
+        type: "string"
+  Auth:
+    type: "object"
+    properties:
+      rawUrl:
+        type: "string"
+      clientKey:
+        type: "string"
+      clientKeyParameter:
+        type: "string"
+      scopeParameter:
+        type: "string"
+      scope:
+        type: "string"
+      fullUrl:
+        type: "string"
+      source:
+        type: "string"
+  Key:
+    type: "object"
+    properties:
+      apiKey:
+        type: "string"
+  User:
+    type: "object"
+    properties:
+      email:
+        type: "string"
+      group:
+        type: "string"

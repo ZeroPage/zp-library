@@ -1,0 +1,99 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<dom-module id="my-book-detail">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+
+            :host paper-button {
+                background-color: dodgerblue;
+                color: white;
+            }
+
+            :host .image {
+                width: 200px;
+                height: 300px;
+            }
+
+            :host > paper-material {
+                background: #fff;
+            }
+
+            :host .header > div {
+                margin: 8px 8px 0 8px;
+                padding-bottom: 8px;
+
+                border-bottom: thin solid #ddd;
+            }
+
+            :host .content {
+                padding: 8px;
+            }
+        </style>
+        <paper-material class="layout vertical" elevation="1">
+            <div class="header layout horizontal">
+                <iron-image class="image" src="http://placehold.it/160x230" sizing="cover"></iron-image>
+                <div class="layout vertical flex">
+                    <div class="flex">
+                        <h1 class="paper-font-headline">[[title]]</h1>
+                        <div class="paper-font-body2">
+                            [[author]]
+                        </div>
+                        <div class="paper-font-body1">
+                            [[publisher]]
+                        </div>
+                    </div>
+                    <div class="layout horizontal end-justified">
+                        <paper-button class="">[[borrowLabel]]</paper-button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <content></content>
+            </div>
+        </paper-material>
+    </template>
+
+    <script>
+        (function () {
+            'use strict';
+
+            Polymer({
+                is: 'my-book-detail',
+
+                properties: {
+                    title: {
+                        type: String
+                    },
+                    author: {
+                        type: String
+                    },
+                    publisher: {
+                        type: String
+                    },
+
+                    borrowLabel: {
+                        type: String,
+                        value: 'Borrow'
+                    }
+                }
+            });
+        })();
+    </script>
+
+</dom-module>

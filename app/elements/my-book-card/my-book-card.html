@@ -1,0 +1,114 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../../bower_components/paper-styles/classes/typography.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/classes/iron-flex-layout.html">
+
+<dom-module id="my-book-card">
+    <template>
+        <style include="paper-material">
+            :host {
+                display: inline-block;
+                position: relative;
+                box-sizing: border-box;
+
+                background: #fff;
+                border-radius: 2px;
+            }
+
+            :host a {
+                color: #212121;
+                text-decoration: none;
+            }
+
+            :host a:hover {
+                text-decoration: underline;
+            }
+
+            :host .wrapper {
+                height: 100%;
+            }
+
+            :host .image {
+                position: relative;
+            }
+
+            :host .content {
+                padding: 8px 12px;
+            }
+
+            :host .title {
+                color: #212121;
+            }
+
+            :host .author {
+                color: #737373;
+            }
+
+
+
+        </style>
+        <div class="wrapper layout vertical">
+            <div class="image flex">
+                <a href$="[[href]]">
+                    <iron-image class="fit" src$="[[image]]" sizing="cover"></iron-image>
+                </a>
+            </div>
+            <div class="content layout vertical">
+                <a class="title paper-font-body2 flex" href$="[[href]]">{{title}}</a>
+                <span class="author paper-font-body1 flex">{{author}}</span>
+            </div>
+        </div>
+
+    </template>
+
+    <script>
+        (function () {
+            'use strict';
+
+            Polymer({
+                is: 'my-book-card',
+
+                properties: {
+                    title: {
+                        type: String
+                    },
+
+                    author: {
+                        type: String
+                    },
+
+                    href: {
+                        type: String
+                    },
+
+                    image: {
+                        type: String
+                    },
+
+                    elevation: {
+                        type: Number,
+                        value: 1,
+                        reflectToAttribute: true
+                    }
+                },
+
+                search: function () {
+                    this.fire('request', {query: this.query});
+                }
+
+            });
+        })();
+    </script>
+
+</dom-module>

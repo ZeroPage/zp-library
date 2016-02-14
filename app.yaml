@@ -1,0 +1,96 @@
+###############################################################
+
+application: skywave-dc
+env_variables:
+  GITHUB_CLIENT: 'c69e5ed9b65bcefb458f'
+  GITHUB_SECRET: '8fdcc058aa18fd227d86e6c9d9158c7048a4043e'
+
+###############################################################
+
+# https://github.com/StartPolymer/polymer-starter-kit-plus/blob/master/app.yaml
+version: 1
+api_version: 1
+runtime: python27
+threadsafe: false
+
+handlers:
+- url: /init
+  script: init.APPLICATION
+  login: admin
+#
+#- url: /api/ui(/.*)?
+#  script: swagger_ui.APPLICATION
+
+- url: /api/.*
+  script: swagger.APPLICATION
+#    http_headers:
+#    # You can also replace "*" with a specific host, e.g. https://example.org
+#    Access-Control-Allow-Origin: "*"
+
+# Manifest files
+- url: /(.+\.webapp)
+  static_files: app/\1
+  upload: app/(.+\.webapp)
+  mime_type: application/x-web-app-manifest+json
+
+# Fonts and images
+
+
+- url: /(.+\.(eot|otf|tt[cf]|woff2?|cur|gif|ico|jpe?g|png|svgz?|webp))
+  static_files: app/\1
+  upload: app/(.+\.(eot|otf|tt[cf]|woff2?|cur|gif|ico|jpe?g|png|svgz?|webp))
+
+
+# CSS, Javascript, JSON and other file types
+
+- url: /(.+\.(css|js|json|xml))
+  static_files: app/\1
+  upload: app/(.+\.(css|js|json|xml))
+
+# HTML pages
+
+- url: /404.html
+  static_files: 404.html
+  upload: 404.html
+
+- url: /elements/(.+\.html)
+  static_files: app/elements/\1
+  upload: app/elements/(.+\.html)
+  mime_type:
+
+- url: /(.+\.html)
+  static_files: app/\1
+  upload: app/(.+\.html)
+  http_headers:
+    # Force Internet Explorer to render pages in the highest available
+    # mode in the various cases when it may not.
+    # https://hsivonen.fi/doctype/#ie8
+    X-UA-Compatible: "IE=edge"
+    # For more details on how to craft a reasonable policy for your site, read:
+    # http://www.html5rocks.com/en/tutorials/security/content-security-policy/ (or
+    # the specification: http://www.w3.org/TR/CSP11/). Also, to make things easier,
+    # you can use an online CSP header generator such as: http://cspisawesome.com/.
+    #Content-Security-Policy: "script-src 'self'; object-src 'self'"
+
+# Text files
+
+- url: /humans.txt
+  static_files: app/humans.txt
+  upload: app/humans.txt
+
+- url: /robots.txt
+  static_files: app/robots.txt
+  upload: app/robots.txt
+
+- url: /(.+\.txt)
+  static_files: app/\1
+  upload: app/(.+\.txt)
+
+# Homepage
+
+- url: /(.*)
+  static_files: app/index.html
+  upload: app/index.html
+  http_headers:
+    X-UA-Compatible: "IE=edge"
+    #Content-Security-Policy: "script-src 'self'; object-src 'self'"
