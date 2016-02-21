@@ -98,6 +98,8 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/Book"
+        403:
+          description: "not allowed"
   /book/{isbn}:
     get:
       tags:
@@ -112,6 +114,8 @@ paths:
       responses:
         200:
           description: "Sends the book"
+        403:
+          description: "not allowed"
     post:
       tags:
       - "Book"
@@ -131,6 +135,8 @@ paths:
       responses:
         200:
           description: "Make a new book"
+        403:
+          description: "not allowed"
     put:
       tags:
       - "Book"
@@ -150,6 +156,8 @@ paths:
       responses:
         200:
           description: "Updates the book"
+        403:
+          description: "not allowed"
 securityDefinitions:
   libraryKey:
     type: apiKey
