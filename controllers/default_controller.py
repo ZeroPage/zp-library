@@ -35,11 +35,11 @@ def current_user():
         return selected_user('')
 
 
-def selected_user(id):
-    if not id:
+def selected_user(user_id):
+    if not user_id:
         return flask.Response(status=404)
 
-    user_entity = ndb.Key(User, id.lower()).get()
+    user_entity = ndb.Key(User, user_id.lower()).get()
 
     if user_entity:
         return user_entity.to_obj()
