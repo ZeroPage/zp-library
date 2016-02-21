@@ -17,6 +17,9 @@ def get_param_from_query(query, target):
 
 
 def get_user_from_key(api_key):
+    if not api_key:
+        return None
+
     key_entity = ndb.Key(ApiKey, api_key).get()
 
     if not key_entity:
