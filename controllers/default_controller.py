@@ -10,7 +10,7 @@ github_secret = 'GITHUB_SECRET'
 github_client = 'GITHUB_CLIENT'
 
 
-def get_from_query(query, target):
+def get_param_from_query(query, target):
     for p in query.split('&'):
         if 0 <= p.find('=') < len(p) - 1:
             p_key, p_value = p.split('=')
@@ -21,18 +21,28 @@ def get_from_query(query, target):
     return None
 
 
+def get_user_from_key(api_key):
+    key_entity = ndb.Key(ApiKey, api_key).get()
+
+    if not key_entity:
+        return None
+
+    return key_entity.user.get()
+
+
+def get_current_user():
+    api_key = get_param_from_query(connexion.request.query_string, 'api_key')
+
+    return get_user_from_key(api_key)
+
+
 def current_user():
-    api_key = get_from_query(connexion.request.query_string, 'api_key')
+    user = get_current_user()
 
-    if not api_key:
-        return selected_user('')
+    if not user:
+        return flask.Response(status=401)
 
-    api_key_entity = ndb.Key(ApiKey, api_key).get()
-
-    if api_key_entity:
-        return selected_user(api_key_entity.user.id())
-    else:
-        return selected_user('')
+    return user.to_obj()
 
 
 def selected_user(user_id):
