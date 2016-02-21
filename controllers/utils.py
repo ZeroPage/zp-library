@@ -1,7 +1,8 @@
 import connexion
 from google.appengine.ext import ndb
 
-from models.classes import ApiKey
+import init
+from models.classes import ApiKey, Group
 
 
 def get_param_from_query(query, target):
@@ -28,3 +29,12 @@ def get_current_user():
     api_key = get_param_from_query(connexion.request.query_string, 'api_key')
 
     return get_user_from_key(api_key)
+
+
+def get_current_group():
+    current_user = get_current_user()
+
+    if not current_user:
+        return ndb.Key(Group, init.INIT_GROUP_ANONYMOUS).get()
+
+    return current_user.group.get()
