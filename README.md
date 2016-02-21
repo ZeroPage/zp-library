@@ -25,5 +25,5 @@
 1. Run ```appcfg.py update .``` on the project root.
 1. Visit one of the URLs below on your browser:
     * ```http://(your-project-id).appspot.com```: Client
-    * ```http://(your-project-id).appspot.com```: API Client.
+    * ```http://(your-project-id).appspot.com/api/ui```: API Client.
     * ```https://console.developer.google.com```: Admin console
