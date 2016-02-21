@@ -55,8 +55,6 @@ paths:
       tags:
       - "User"
       operationId: "controllers.default_controller.current_user"
-      security:
-        - libraryKey: []
       responses:
         200:
           description: "get current user"
@@ -130,8 +128,6 @@ paths:
         required: true
         schema:
           $ref: "#/definitions/Book"
-      security:
-        - libraryKey: []
       responses:
         200:
           description: "Make a new book"
@@ -151,8 +147,6 @@ paths:
         required: true
         schema:
           $ref: "#/definitions/Book"
-      security:
-        - libraryKey: []
       responses:
         200:
           description: "Updates the book"
