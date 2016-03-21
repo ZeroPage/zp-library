@@ -193,18 +193,21 @@ definitions:
         type: "integer"
       language:
         type: "string"
-      imageSmall:
-        type: "string"
-      imageLarge:
-        type: "string"
-      addedDate:
-        type: "string"
-      updatedDate:
-        type: "string"
-      quantity:
-        type: "integer"
-      memo:
-        type: "string"
+      extra:
+        type: "object"
+        properties:
+          imageSmall:
+            type: "string"
+          imageLarge:
+            type: "string"
+          addedDate:
+            type: "string"
+          updatedDate:
+            type: "string"
+          quantity:
+            type: "integer"
+          memo:
+            type: "string"
   Auth:
     type: "object"
     properties:
