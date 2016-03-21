@@ -167,9 +167,43 @@ definitions:
   Book:
     type: "object"
     properties:
-      isbn:
+      id:
         type: "string"
-      name:
+      title:
+        type: "string"
+      subTitle:
+        type: "string"
+      contentVersion:
+        type: "string"
+      authors:
+        type: "array"
+        items:
+          type: "string"
+      translators:
+        type: "array"
+        items:
+          type: "string"
+      publisher:
+        type: "string"
+      publishedDate:
+        type: "date"
+      description:
+        type: "string"
+      pageCount:
+        type: "integer"
+      language:
+        type: "string"
+      imageSmall:
+        type: "string"
+      imageLarge:
+        type: "string"
+      addedDate:
+        type: "dateTime"
+      updatedDate:
+        type: "dateTime"
+      quantity:
+        type: "integer"
+      memo:
         type: "string"
   Auth:
     type: "object"
