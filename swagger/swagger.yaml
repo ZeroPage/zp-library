@@ -186,7 +186,7 @@ definitions:
       publisher:
         type: "string"
       publishedDate:
-        type: "date"
+        type: "string"
       description:
         type: "string"
       pageCount:
@@ -198,9 +198,9 @@ definitions:
       imageLarge:
         type: "string"
       addedDate:
-        type: "dateTime"
+        type: "string"
       updatedDate:
-        type: "dateTime"
+        type: "string"
       quantity:
         type: "integer"
       memo:
