@@ -100,15 +100,15 @@ paths:
               $ref: "#/definitions/Book"
         403:
           description: "not allowed"
-  /book/{isbn}:
+  /book/{id}:
     get:
       tags:
       - "Book"
-      operationId: "controllers.default_controller.book_isbn_get"
+      operationId: "controllers.default_controller.book_id_get"
       parameters:
-      - name: "isbn"
+      - name: "id"
         in: "path"
-        description: "isbn of the book"
+        description: "id of the book"
         required: true
         type: "string"
       responses:
@@ -119,11 +119,11 @@ paths:
     post:
       tags:
       - "Book"
-      operationId: "controllers.default_controller.book_isbn_post"
+      operationId: "controllers.default_controller.book_id_post"
       parameters:
-      - name: "isbn"
+      - name: "id"
         in: "path"
-        description: "isbn of the book"
+        description: "id of the book"
         required: true
         type: "string"
       - name: "book"
@@ -140,11 +140,11 @@ paths:
     put:
       tags:
       - "Book"
-      operationId: "controllers.default_controller.book_isbn_put"
+      operationId: "controllers.default_controller.book_id_put"
       parameters:
-      - name: "isbn"
+      - name: "id"
         in: "path"
-        description: "isbn of the book"
+        description: "id of the book"
         required: true
         type: "string"
       - name: "book"

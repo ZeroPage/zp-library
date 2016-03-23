@@ -106,13 +106,13 @@ def book_get(limit):
     return 'book get response!'
 
 
-def book_isbn_get(isbn):
+def book_id_get(id):
     return 'book isbn get response!'
 
 
-def book_isbn_put(isbn, book):
+def book_id_put(id, book):
     return 'book put response!'
 
 
-def book_isbn_post(isbn, book):
+def book_id_post(id, book):
     return 'book post response!'
