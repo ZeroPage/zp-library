@@ -48,5 +48,24 @@ class Extra(ndb.Model):
     value = ndb.GenericProperty(indexed=False)
 
 
+class Book(ndb.Model):
+    title = ndb.StringProperty(required=True)
+    subTitle = ndb.StringProperty()
+    content_version = ndb.StringProperty()
+    authors = ndb.StringProperty(repeated=True)
+    translators = ndb.StringProperty(repeated=True)
+    publisher = ndb.StringProperty()
+    published_date = ndb.DateProperty()
+    description = ndb.StringProperty()
+    page_count = ndb.IntegerProperty()
+    language = ndb.StringProperty()
+    image_small = ndb.StringProperty()
+    image_large = ndb.StringProperty()
+    added_date = ndb.DateTimeProperty()
+    updated_date = ndb.DateTimeProperty()
+    quantity = ndb.IntegerProperty()
+    memo = ndb.StringProperty
+
+
 def generate_key(key_length):
     return ''.join(random.SystemRandom().choice(string.ascii_lowercase + string.digits) for _ in range(key_length))
