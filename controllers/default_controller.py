@@ -16,7 +16,7 @@ def current_user():
     if not user:
         return flask.Response(status=401)
 
-    return user.to_obj()
+    return user.to_dict()
 
 
 def selected_user(user_id):
@@ -26,7 +26,7 @@ def selected_user(user_id):
     user_entity = ndb.Key(User, user_id.lower()).get()
 
     if user_entity:
-        return user_entity.to_obj()
+        return user_entity.to_dict()
     else:
         return flask.Response(status=404)
 

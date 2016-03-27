@@ -29,13 +29,6 @@ class User(ndb.Model):
     group = ndb.KeyProperty(Group, default=ndb.Key(Group, 'pending'))
     name = ndb.StringProperty(default='no name')
 
-    def to_obj(self):
-        return {
-            'id': self.key.id(),
-            'group': self.group.id(),
-            'name': self.name
-        }
-
     @staticmethod
     def get_new_key():
         while True:
