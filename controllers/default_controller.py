@@ -83,8 +83,8 @@ def auth_key(source, token):
 
                 if not user_email:
                     user_email = UserEmail(id=primary_email)
-                    new_key = ApiKey(id=ApiKey.get_new_key())
-                    new_user = User(id=User.get_new_key())
+                    new_key = ApiKey(id=generate_key(ApiKey))
+                    new_user = User(id=generate_key(User))
 
                     new_user.api_key = new_key.key
                     new_user.email = user_email.key
