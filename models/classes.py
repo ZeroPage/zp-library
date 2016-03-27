@@ -49,7 +49,7 @@ class Book(ndb.Model):
     added_date = ndb.DateTimeProperty()
     updated_date = ndb.DateTimeProperty()
     quantity = ndb.IntegerProperty()
-    memo = ndb.StringProperty
+    memo = ndb.StringProperty()
 
 
 def generate_key(model):
