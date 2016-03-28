@@ -47,7 +47,7 @@ class Book(ndb.Model):
     key_length = 6
 
     title = ndb.StringProperty(required=True)
-    subTitle = ndb.StringProperty()
+    subtitle = ndb.StringProperty()
     content_version = ndb.StringProperty()
     authors = ndb.StringProperty(repeated=True)
     translators = ndb.StringProperty(repeated=True)
