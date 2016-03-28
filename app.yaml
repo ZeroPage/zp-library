@@ -2,8 +2,8 @@
 
 application: your-application-id
 env_variables:
-  GITHUB_CLIENT: 'c69e5ed9b65bcefb458f'
-  GITHUB_SECRET: 'ba24115bec77325078d2419625e38058afe54c55'
+  GITHUB_CLIENT: 'your-github-client-key'
+  GITHUB_SECRET: 'your-github-secret-key'
 
 ###############################################################
 
