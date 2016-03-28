@@ -125,4 +125,21 @@ def book_id_put(id, book):
 
 
 def book_id_post(id, book):
-    return 'book post response!'
+    current_group = utils.get_current_group()
+
+    if not current_group.book_edit:
+        return flask.Response(status=403, response='no permission')
+
+    if not (len(id) == 13 and id.isdigit()):
+        return flask.Response(status=400, response='id must be 13 digits integer')
+
+    if isinstance(book_id_get(id), dict):
+        return flask.Response(status=400, response='already exists')
+
+    new_book = Book(id=id)
+    new_book.title = book['title']
+    new_book.authors = book['authors']
+
+    new_book.put()
+
+    return {id: new_book.to_dict()}
