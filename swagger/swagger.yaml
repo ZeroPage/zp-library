@@ -169,8 +169,6 @@ definitions:
   Book:
     type: "object"
     properties:
-      id:
-        type: "string"
       title:
         type: "string"
       subtitle:
