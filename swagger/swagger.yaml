@@ -202,13 +202,16 @@ definitions:
             type: "string"
           imageLarge:
             type: "string"
-          addedDate:
-            type: "string"
-          updatedDate:
-            type: "string"
           quantity:
             type: "integer"
           memo:
+            type: "string"
+      automated:
+        type: "object"
+        properties:
+          addedDate:
+            type: "string"
+          updatedDate:
             type: "string"
   Auth:
     type: "object"
