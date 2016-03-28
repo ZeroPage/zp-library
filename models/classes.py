@@ -31,6 +31,18 @@ class Extra(ndb.Model):
     value = ndb.GenericProperty(indexed=False)
 
 
+class BookExtra(ndb.Model):
+    image_large = ndb.StringProperty()
+    image_small = ndb.StringProperty()
+    quantity = ndb.IntegerProperty()
+    memo = ndb.StringProperty()
+
+
+class BookAutomated(ndb.Model):
+    updated_date = ndb.DateTimeProperty(auto_now=True)
+    added_date = ndb.DateTimeProperty(auto_now_add=True)
+
+
 class Book(ndb.Model):
     key_length = 6
 
@@ -44,12 +56,9 @@ class Book(ndb.Model):
     description = ndb.StringProperty()
     page_count = ndb.IntegerProperty()
     language = ndb.StringProperty()
-    image_small = ndb.StringProperty()
-    image_large = ndb.StringProperty()
-    added_date = ndb.DateTimeProperty()
-    updated_date = ndb.DateTimeProperty()
-    quantity = ndb.IntegerProperty()
-    memo = ndb.StringProperty()
+
+    extra = ndb.StructuredProperty(BookExtra, required=True)
+    automated = ndb.StructuredProperty(BookAutomated, required=True)
 
 
 def generate_key(model):
