@@ -173,9 +173,9 @@ definitions:
         type: "string"
       title:
         type: "string"
-      subTitle:
+      subtitle:
         type: "string"
-      contentVersion:
+      content_version:
         type: "string"
       authors:
         type: "array"
@@ -187,20 +187,20 @@ definitions:
           type: "string"
       publisher:
         type: "string"
-      publishedDate:
+      published_date:
         type: "string"
       description:
         type: "string"
-      pageCount:
+      page_count:
         type: "integer"
       language:
         type: "string"
       extra:
         type: "object"
         properties:
-          imageSmall:
+          image_small:
             type: "string"
-          imageLarge:
+          image_large:
             type: "string"
           quantity:
             type: "integer"
@@ -209,31 +209,31 @@ definitions:
       automated:
         type: "object"
         properties:
-          addedDate:
+          added_date:
             type: "string"
-          updatedDate:
+          updated_date:
             type: "string"
   Auth:
     type: "object"
     properties:
-      rawUrl:
+      raw_url:
         type: "string"
-      clientKey:
+      client_key:
         type: "string"
-      clientKeyParameter:
+      client_key_parameter:
         type: "string"
-      scopeParameter:
+      scope_parameter:
         type: "string"
       scope:
         type: "string"
-      fullUrl:
+      full_url:
         type: "string"
       source:
         type: "string"
   Key:
     type: "object"
     properties:
-      apiKey:
+      api_key:
         type: "string"
   User:
     type: "object"

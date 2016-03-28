@@ -42,13 +42,13 @@ def auth_source():
         scope = 'user:email'
 
         auth_methods.append({'source': 'github',
-                             'rawUrl': raw_url,
-                             'clientKeyParameter': client_key_parameter,
-                             'clientKey': client_key,
-                             'scopeParameter': scope_parameter,
+                             'raw_url': raw_url,
+                             'client_key_parameter': client_key_parameter,
+                             'client_key': client_key,
+                             'scope_parameter': scope_parameter,
                              'scope': scope,
-                             'fullUrl': '{}?{}={}&{}={}'.format(raw_url, client_key_parameter, client_key,
-                                                                scope_parameter, scope)})
+                             'full_url': '{}?{}={}&{}={}'.format(raw_url, client_key_parameter, client_key,
+                                                                 scope_parameter, scope)})
 
     return auth_methods
 
@@ -95,7 +95,7 @@ def auth_key(source, token):
                     new_key.put()
                     user_email.put()
 
-                return {'apiKey': user_email.user.get().api_key.id()}
+                return {'api_key': user_email.user.get().api_key.id()}
 
         return 'not valid token'
     else:
