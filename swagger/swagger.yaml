@@ -116,6 +116,8 @@ paths:
           description: "Sends the book"
         403:
           description: "not allowed"
+        404:
+          description: "not found"
     post:
       tags:
       - "Book"
