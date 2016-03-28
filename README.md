@@ -7,6 +7,7 @@
 1. Download and unarchive on the project root
 1. Run ```pip install -t lib -r requirement.txt```
 1. Run ```bower install```
+1. Copy `app.yaml.template` to `app.yaml`.
 1. Get Github Client Key from [here](https://github.com/settings/developers).
     * Homepage URL must be set correctly. If you're just testing on your local, use ```http://127.0.0.1:8080```.
     * 'Authorization callback URL' must be ```(host)/#!/auth/github```. Just like ```http://127.0.0.1:8080/#!/auth/github```
