@@ -103,7 +103,16 @@ def auth_key(source, token):
 
 
 def book_get(limit):
-    return 'book get response!'
+    current_group = utils.get_current_group()
+
+    if not current_group.book_view:
+        return flask.Response(status=403, response='no permission')
+
+    books = Book.query().order(-Book.added_date).fetch(limit)
+
+    results = [{book.key.id(): book.to_dict()} for book in books]
+
+    return results
 
 
 def book_id_get(id):
