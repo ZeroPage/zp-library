@@ -145,12 +145,9 @@ def book_id_post(id, book):
     if isinstance(book_id_get(id), dict):
         return flask.Response(status=400, response='already exists')
 
-    new_book = Book(id=id)
-    new_book.title = book['title']
-    new_book.authors = book['authors']
-
+    del book['automated']
+    new_book = Book(id=id, **book)
     new_book.automated = BookAutomated()
-    new_book.extra = BookExtra()
 
     new_book.put()
 
