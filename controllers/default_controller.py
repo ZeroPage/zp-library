@@ -107,7 +107,17 @@ def book_get(limit):
 
 
 def book_id_get(id):
-    return 'book isbn get response!'
+    current_group = utils.get_current_group()
+
+    if not current_group.book_view:
+        return flask.Response(status=403, response='no permission')
+
+    selected_book = ndb.Key(Book, id.lower()).get()
+
+    if selected_book:
+        return {selected_book.key.id(): selected_book.to_dict()}
+    else:
+        return flask.Response(status=404, response='not found')
 
 
 def book_id_put(id, book):
