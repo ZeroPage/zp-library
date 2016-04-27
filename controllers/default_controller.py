@@ -16,7 +16,10 @@ def current_user():
     if not user:
         return flask.Response(status=401)
 
-    return user.to_dict()
+    return {
+        'email': user.email.id() if user.email else '',
+        'group': user.group.id()
+    }
 
 
 def selected_user(user_id):
