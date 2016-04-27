@@ -63,6 +63,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             app.route = 'about';
         });
 
+        page('/login', function () {
+           app.route = 'login';
+        });
+
         page('/auth/:source', function (data) {
             app.route = 'api-key';
 

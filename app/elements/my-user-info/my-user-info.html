@@ -1,0 +1,148 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-icons/communication-icons.html">
+<link rel="import" href="../../bower_components/iron-localstorage/iron-localstorage.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
+
+
+<dom-module id="my-user-info">
+    <template>
+        <style include="shared-styles"></style>
+        <style>
+            :host {
+                @apply(--layout-vertical);
+                @apply(--layout-center);
+            }
+
+            :host a {
+                color: #212121;
+                text-decoration: none;
+            }
+
+            #loginButton {
+                color: blue;
+            }
+
+            #logoutButton {
+                color: red;
+            }
+        </style>
+        <iron-localstorage
+                id="storage"
+                name="api-key"
+                value="{{apiKey}}"
+                use-raw="true"
+                on-iron-localstorage-load-empty="logout"
+        ></iron-localstorage>
+        <iron-ajax
+                id="loginAjax"
+                auto
+                handle-as="json"
+                on-response="handleLogin"
+                on-error="handleError"
+        ></iron-ajax>
+        <iron-ajax
+                id="userAjax"
+                url="/api/user"
+                handle-as="json"
+                on-response="handleAjax"
+                on-error="handleError"
+        ></iron-ajax>
+        <template is="dom-if" if="[[loading]]">
+            <paper-spinner active></paper-spinner>
+            <span>Signing in...</span>
+        </template>
+        <template is="dom-if" if="[[!loading]]">
+            <template is="dom-if" if="[[apiKey]]">
+                <span class="flex">[[user.email]] / [[user.group]]</span>
+                <paper-button id="logoutButton" class="flex self-stretch" on-tap="logout">
+                    LOGOUT
+                </paper-button>
+            </template>
+            <template is="dom-if" if="[[!apiKey]]">
+                <a class="layout vertical flex self-stretch" href$="[[href]]">
+                    <paper-button id="loginButton">
+                        LOGIN
+                    </paper-button>
+                </a>
+            </template>
+        </template>
+    </template>
+
+    <script>
+        (function () {
+            'use strict';
+
+            Polymer({
+                is: 'my-user-info',
+
+                properties: {
+                    href: {
+                        type: String
+                    },
+
+                    user: {
+                        type: Object
+                    },
+
+                    apiKey: {
+                        type: String,
+                        observer: '_apiKeyChanged'
+                    },
+
+                    loading: {
+                        type: Boolean,
+                        value: false,
+                        readOnly: true
+                    }
+                },
+
+                login: function (source, token) {
+                    this.$.loginAjax.url = '/api/auth/key/' + source + "/" + token;
+                    this._setLoading(true);
+                },
+
+                logout: function () {
+                    this.apiKey = '';
+                },
+
+                handleLogin: function (e, detail) {
+                    this.apiKey = detail.response.api_key;
+                    this._setLoading(false);
+                },
+
+                handleAjax: function (e, detail) {
+                    this.user = detail.response;
+                    this._setLoading(false);
+                },
+
+                handleError: function () {
+                    this.fire('error');
+                    this.logout();
+                },
+
+                _apiKeyChanged: function () {
+                    if (this.apiKey) {
+                        this.$.userAjax.params = {'api_key': this.apiKey};
+                        this.$.userAjax.generateRequest();
+                        this._setLoading(true);
+                    }
+                }
+            });
+        })();
+    </script>
+
+</dom-module>

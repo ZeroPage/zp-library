@@ -71,31 +71,35 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </template>
     <paper-drawer-panel id="paperDrawerPanel">
         <!-- Drawer Scroll Header Panel -->
-        <paper-scroll-header-panel drawer fixed>
+        <div class="layout vertical" drawer>
+            <paper-scroll-header-panel class="flex" fixed>
 
-            <!-- Drawer Toolbar -->
-            <paper-toolbar id="drawerToolbar">
-                <span class="paper-font-title">[[locale.menu_title]]</span>
-            </paper-toolbar>
+                <!-- Drawer Toolbar -->
+                <paper-toolbar id="drawerToolbar">
+                    <span class="paper-font-title">[[locale.menu_title]]</span>
+                </paper-toolbar>
 
-            <!-- Drawer Content -->
-            <paper-menu class="list" attr-for-selected="data-route" selected="[[route]]">
-                <a data-route="home" href="{{baseUrl}}">
-                    <iron-icon icon="home"></iron-icon>
-                    <span>{{locale.menu_home}}</span>
-                </a>
+                <!-- Drawer Content -->
+                <paper-menu class="list" attr-for-selected="data-route" selected="[[route]]">
+                    <a data-route="home" href="{{baseUrl}}">
+                        <iron-icon icon="home"></iron-icon>
+                        <span>{{locale.menu_home}}</span>
+                    </a>
 
-                <a data-route="books" href="{{baseUrl}}books">
-                    <iron-icon icon="book"></iron-icon>
-                    <span>{{locale.menu_books}}</span>
-                </a>
+                    <a data-route="books" href="{{baseUrl}}books">
+                        <iron-icon icon="book"></iron-icon>
+                        <span>{{locale.menu_books}}</span>
+                    </a>
 
-                <a data-route="about" href="{{baseUrl}}about">
-                    <iron-icon icon="info"></iron-icon>
-                    <span>{{locale.menu_about}}</span>
-                </a>
-            </paper-menu>
-        </paper-scroll-header-panel>
+                    <a data-route="about" href="{{baseUrl}}about">
+                        <iron-icon icon="info"></iron-icon>
+                        <span>{{locale.menu_about}}</span>
+                    </a>
+                </paper-menu>
+            </paper-scroll-header-panel>
+            <my-user-info id="userInfo" href="login"></my-user-info>
+        </div>
+
 
         <!-- Main Area -->
         <paper-scroll-header-panel main id="headerPanelMain"
@@ -181,8 +185,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 </section>
 
                 <section data-route="api-key">
-                    <p>어플리케이션으로 돌아가 다음의 키를 입력하세요:</p>
-                    <p><strong>{{params.token}}</strong></p>
+                    <div>
+                        <p>[[params.source]]로 인증이 거의 완료되었습니다.</p>
+
+                        <div>
+                            <h3>웹 클라이언트 이용</h3>
+                            <paper-button raised on-tap="login">
+                                로그인
+                            </paper-button>
+
+                        </div>
+                        <div>
+                            <h3>외부 클라이언트 이용</h3>
+                            <p>어플리케이션으로 돌아가 다음의 키를 입력하세요:</p>
+                            <p><strong>{{params.token}}</strong></p>
+                        </div>
+                    </div>
                 </section>
 
                 <section data-route="about">
@@ -216,6 +234,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                             LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
                             OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
                     </paper-material>
+                </section>
+                <section data-route="login">
+                    <iron-ajax
+                            auto
+                            url="/api/auth/source"
+                            handle-as="json"
+                            last-response="{{auth_sources}}"
+                    ></iron-ajax>
+                    <template is="dom-repeat" items="[[auth_sources]]" as="auth_source">
+                        <a href="[[auth_source.full_url]]">
+                            Sign up with [[auth_source.source]]
+                        </a>
+                    </template>
                 </section>
             </iron-pages>
         </paper-scroll-header-panel>

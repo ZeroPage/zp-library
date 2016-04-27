@@ -54,6 +54,12 @@
         app.$.toast.show()
     };
 
+    app.login = function () {
+        var userInfo = app.$.userInfo;
+        userInfo.login(app.params.source, app.params.token);
+        page.redirect('/');
+    };
+
     app.displayInstalledToast = function () {
         // Check to make sure caching is actually enabled—it won't be in the dev environment.
         if (!Polymer.dom(document).querySelector('platinum-sw-cache').disabled) {
