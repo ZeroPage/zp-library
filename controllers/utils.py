@@ -2,7 +2,7 @@ import connexion
 from google.appengine.ext import ndb
 
 import init
-from models.classes import ApiKey, Group
+from models.classes import ApiKey, Group, User, UserEmail
 
 
 def get_param_from_query(query, target):
@@ -16,9 +16,15 @@ def get_param_from_query(query, target):
     return None
 
 
+def get_anonymous_user():
+    return User(
+            group=ndb.Key(Group, init.INIT_GROUP_ANONYMOUS)
+    )
+
+
 def get_user_from_key(api_key):
     if not api_key:
-        return None
+        return get_anonymous_user()
 
     key_entity = ndb.Key(ApiKey, api_key).get()
 
