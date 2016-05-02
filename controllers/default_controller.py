@@ -105,7 +105,7 @@ def auth_key(source, token):
         return 'not supported'
 
 
-def book_get(limit):
+def book_list_get(limit, offset):
     current_group = utils.get_current_group()
 
     if not current_group.book_view:

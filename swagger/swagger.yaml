@@ -77,7 +77,7 @@ paths:
             $ref: "#/definitions/User"
         400:
           description: "not found"
-  /book:
+  /book_list:
     get:
       tags:
       - "Book"
