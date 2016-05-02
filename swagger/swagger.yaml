@@ -81,7 +81,7 @@ paths:
     get:
       tags:
       - "Book"
-      operationId: "controllers.default_controller.book_get"
+      operationId: "controllers.default_controller.book_list_get"
       parameters:
       - name: "limit"
         in: "query"
@@ -91,6 +91,12 @@ paths:
         default: 10
         maximum: 100
         minimum: 1
+      - name: "offset"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 0
+        minimum: 0
       responses:
         200:
           description: "List all books"

@@ -111,7 +111,7 @@ def book_get(limit):
     if not current_group.book_view:
         return flask.Response(status=403, response='no permission')
 
-    books = Book.query().order(-Book.automated.added_date).fetch(limit)
+    books = Book.query().order(-Book.automated.added_date).fetch(limit, offset=offset)
 
     results = [{book.key.id(): book.to_dict()} for book in books]
 
